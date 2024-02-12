@@ -111,7 +111,7 @@ To access the H2 Console for database management, follow these steps:
 2. **Open a web browser and go to [http://localhost:8080/h2-console](http://localhost:8080/h2-console).**
 
 3. **Use the following H2 database connection settings:**
-    - **JDBC URL:** `jdbc:h2:mem:testdb`
+    - **JDBC URL:** `jdbc:h2:mem:myDatabase`
     - **Username:** `sa`
     - **Password:** (use password in application.properties)
 
