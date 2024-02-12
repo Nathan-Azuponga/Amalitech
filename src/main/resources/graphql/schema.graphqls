@@ -1,0 +1,84 @@
+type Query{
+    getAllUsers:[UserResponse!]!
+    getUserById(id:ID!):UserResponse!
+    getAllProducts:[ProductResponse!]!
+    getProductsByOrderId(id:ID!):[ProductLineResponse!]!
+    getAllOrders:[OrderResponse!]!
+    getOrderById(id:ID!):OrderResponse!
+    getOrdersByUserId(id:ID!):[OrderResponse!]!
+}
+
+type Mutation{
+    createUser(input:UserRequest!):UserResponse
+    updateUser(id:ID!,input:UserRequest!):UserResponse!
+    deleteUser(id:ID!):ID
+    createProduct(input:ProductRequest!):ProductResponse!
+    updateProduct(input:ProductRequest!,id:ID!):ProductResponse!
+    deleteProduct(id:ID!):ID
+    createOrder(input:OrderRequest!,userId:ID!):OrderResponse!
+    updateOrder(input:OrderRequest!,id:ID!):OrderResponse!
+    deleteOrder(id:ID!):ID
+    login(input:AuthenticationRequest!):AuthenticationResponse!
+}
+
+type UserResponse {
+    id:ID!
+    name:String!
+    email:String!
+    role:Role!
+}
+
+type ProductResponse{
+    id:ID!
+    productName:String!
+    price:Float!
+    stock:Int!
+}
+
+type OrderResponse{
+    id:ID!
+    userId:Int!
+    email:String!
+    listOfProductLines:[ProductLineResponse!]!
+}
+
+type ProductLineResponse{
+    productId:Int!
+    unitPrice:Float!
+    productName:String!
+    quantity:Int!
+}
+
+type AuthenticationResponse{
+    token:String!
+}
+
+input UserRequest{
+    name:String
+    email:String
+    role:Role
+    password:String
+}
+
+input ProductRequest{
+    name:String
+    price:Float
+    stock:Int
+}
+
+input OrderRequest{
+    listOfProductLines:[ProductLineRequest!]!
+}
+
+input ProductLineRequest{
+    productId:Int!
+    quantity:Int!
+}
+input AuthenticationRequest{
+    email:String!
+    password:String!
+}
+enum Role {
+    ADMIN
+    USER
+}
